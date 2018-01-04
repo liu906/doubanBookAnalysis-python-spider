@@ -56,10 +56,10 @@ if __name__=='__main__':
     
     threads = []
 
-    #小说 外国文学
-    labels = ['%E5%B0%8F%E8%AF%B4','%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6']
-    #漫画 武侠 哲学 心理学 儿童文学 魔幻 悬疑 名著
-    #labels = ['%E6%BC%AB%E7%94%BB','%E6%AD%A6%E4%BE%A0','%E5%93%B2%E5%AD%A6','%E5%BF%83%E7%90%86%E5%AD%A6','%E5%84%BF%E7%AB%A5%E6%96%87%E5%AD%A6','%E9%AD%94%E5%B9%BB','%E6%82%AC%E7%96%91','%E5%90%8D%E8%91%97']
+    #小说 外国文学 漫画 武侠 哲学 心理学 儿童文学 魔幻 悬疑 名著
+    #labels = ['%E5%B0%8F%E8%AF%B4','%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6','%E6%BC%AB%E7%94%BB','%E6%AD%A6%E4%BE%A0','%E5%93%B2%E5%AD%A6','%E5%BF%83%E7%90%86%E5%AD%A6','%E5%84%BF%E7%AB%A5%E6%96%87%E5%AD%A6','%E9%AD%94%E5%B9%BB','%E6%82%AC%E7%96%91','%E5%90%8D%E8%91%97']
+    #拉美文学 美国 历史 杂文 当代文学
+    labels = ['%E6%8B%89%E7%BE%8E%E6%96%87%E5%AD%A6','%E7%BE%8E%E5%9B%BD','%E5%8E%86%E5%8F%B2','%E6%9D%82%E6%96%87','%E5%BD%93%E4%BB%A3%E6%96%87%E5%AD%A6']
     for label in labels:
         th = threading.Thread(target=get_books,args=(label,))
         threads.append(th)
