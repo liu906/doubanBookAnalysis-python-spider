@@ -74,7 +74,7 @@ def get_author(author_id):
         
         #print('get author_id',author_id)
             
-        out = open('authorSecond.csv', 'a', newline='')
+        out = open('authorSecond2.csv', 'a', newline='')
         #print('open successfully')
 
         csv_writer = csv.writer(out, dialect='excel')
