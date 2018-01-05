@@ -1,4 +1,4 @@
-# liu906.github.io
+# 豆瓣作家分析
 爬取豆瓣图书上作者信息及其代表作信息 进行数据分析
 Crawl and analyze the authors' information from douban.book
 
