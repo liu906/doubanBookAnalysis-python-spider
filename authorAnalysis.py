@@ -35,12 +35,11 @@ def rank_by_pop():
     rank = sorted(rank, key=lambda rank:rank[1])    
     return rank
 
-def MostPopularAuthor():
-    rank = rank_by_pop()
+def Biggset10Author(rank):
     top10 = rank[-10:]
     return top10
 
-def MostUnkownAuthor():
+def Smallest10Author(rank):
     rank = rank_by_pop()
     top10 = rank[0:10]
     return top10
@@ -53,11 +52,12 @@ def draw_top10(top10):
     name_list = ['安东尼·埃克苏佩里','东野圭吾','卡勒德·胡赛尼','郭敬明','村上春树','韩寒','J·K·罗琳','刘慈欣','林少华','余华']
     pop = []
     for i,item in enumerate(top10):
-        #name_list.append(top10[i][0])
+        name_list.append(top10[i][0])
         pop.append(top10[i][1])
         
     rects = plt.bar(range(0,10),pop,width=0.3,align="center",color=('#800000','#B22222','#A52A2A','#CD5C5C','#F08080','#BC8F8F','#FF6347','#E9967A','#FFEFD5','#EEE8AA'))  
-    plt.xticks(range(len(pop)),name_list,rotation=40)
+    plt.xticks(range(len(pop)),name_list,rotation=0,fontsize=16)
+    plt.title('最受欢迎作者TOP10',fontsize=18)
     for i,rect in enumerate(rects):
         height = rect.get_height()
         plt.text(rect.get_x()+rect.get_width()/2.-0.2, 1.03*height, "%s" % int(height))
@@ -101,7 +101,7 @@ def rank_by_grade():
     rank = sorted(rank, key=lambda rank:rank[1])
     return rank
 
-def highest_grade():
+def highest_grade(rank):
 
     top30 = rank[-30:]
     handle = open('HighestGradeTop30.csv','w')
@@ -133,6 +133,7 @@ def draw_highset_grade(top30):
     ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',shadow=True, startangle=90,colors=('#76C0C3','#E8916F'))
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     plt.title('评分最高的30位作家男女比例')
+
     plt.show()
 
 def foreignAuthor(country):
@@ -170,13 +171,47 @@ def foreignAuthor_write_csv():
         csv_writer.writerow(foreignAuthor(country))
         print(foreignAuthor(country))
 
+def author_range(author):
+    author = author[5][1:-1]
+    arr = re.findall(r"\(.+?,.+?,.+?\)",author)
+    max = 0
+    min = 10
+    try :
+        for book in arr:
+            item = book.split(',')
+            num = float(re.search(r'([^0-9]+)([0-9][^0-9][0-9])([^0-9]+)',item[1]).group(2))
+            if num>max :
+                max = num
+            if num<min :
+                min = num
+        return max - min
+    except:
+        return 0     
 
+def  MostUnstableAuthor():
+    rank = []
+    handle = open('author.csv','r')
+    csv_reader = csv.reader(handle)
+    for author in csv_reader:
+        name = author[1]
+        #print(name)
+        a_range = author_range(author)
+        if a_range == 0:
+            continue
+        rank.append([name,a_range])
+    rank = sorted(rank, key=lambda rank:rank[1])   
+    print(rank) 
+    return rank
 
 
 
 if __name__=='__main__':
 
-    draw_top10(MostPopularAuthor())
-    #draw_highset_grade(highest_grade())
+    #draw_top10(MostPopularAuthor())
+    #draw_highset_grade(highest_grade(rank_by_grade()))
     #foreignAuthor_write_csv()
+
+    #draw_top10(Biggset10Author(MostUnstableAuthor()))
+    #rank_by_pop
+    draw_top10(Biggset10Author(rank_by_pop()))
 
