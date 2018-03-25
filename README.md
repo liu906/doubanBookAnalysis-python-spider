@@ -1,5 +1,6 @@
 # 豆瓣作家分析
 爬取豆瓣图书上作者信息及其代表作信息 进行数据分析
+您可以通过阅读项目报告来快速了解我的项目
 Crawl and analyze the authors' information from douban.book
 
 My python version is Python 3.6.3
